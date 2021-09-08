@@ -67,5 +67,32 @@
       ((and (<= y x) (<= y z)) (sumSquare (square x) (square z))) 
       (else (sumSquare (square x) (square y)))
     )
-) 
+)
+
+; Exercise 4
+; Describe what the following does
+(define (a-plus-abs-b a b)
+    ((if (> b 0) + -) a b))
+
+    ; Essentially, the body checks if 'b' is greater than 0.
+    ; if TRUE, then the expression reduces to the + symbol and adds the two integers together
+    ; if FALSE, then the expression reduces to the - symbol. This means that 'b' is negative. So the expression looks like this: 
+        ; (- a {-}b) => meaning that it returns the absolute value of 'b' and adds it to a
+
+; Exercise 5
+; Determine the outcomes if this procedure is interpreted using applicative-order evals vs normal-order.
+(define (p) (p))
+(define (test x y)
+    (if (= x 0) 0 y))
+
+; What happens if we run?
+(test 0 (p))
+
+; Applicative-Order
+; Running in Applicative-Orders causes this to never finish running.
+; Since Lisp will evaluate all arguments first, the function (p) causes an infinite loop. As it only relates to itself. 
+
+; Normal-Order
+; In Normal Order, running the procedure would result in a 0. Since it first evaluates 
+; the IF statement, (which results in True). Lisp will not even try to evaluate what (p) is as it's currently an outcome that will not happen.
     
